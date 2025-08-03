@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="f4elo96ojvBy3gN5ZID8jZhqYky8j-9-tqAnDKvxR1I" />
+  <title>Normal Scientific Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(145deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .calculator {
+      width: 100%;
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .display {
+      background: rgba(255, 255, 255, 0.1);
+      color: #0ff;
+      font-size: 24px;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: right;
+      overflow-x: auto;
+      height: 60px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #1e1e1e, #2e2e2e);
+      color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 255, 255, 0.2);
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button:hover {
+      background: #00f2ff;
+      color: #000;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00f2ff;
+    }
+
+    button:active {
+      transform: scale(0.95);
+      box-shadow: inset 0 0 5px #00f2ff;
+    }
+
+    .special {
+      background: #ff9800;
+      color: #000;
+    }
+
+    .equals {
+      background: #03a9f4;
+      color: #000;
+      grid-column: span 2;
+    }
+
+    .wide {
+      grid-column: span 2;
+    }
+    </style>
+</head>
+<body>
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button onclick="clearDisplay()">AC</button>
+      <button onclick="delChar()">DEL</button>
+      <button onclick="append('%')">%</button>
+      <button onclick="append('/')">÷</button>
+      <button onclick="append('Math.PI')">π</button>
+      <button onclick="append('Math.E')">e</button>
+
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button onclick="append('*')">×</button>
+      <button onclick="append('Math.pow(')">xʸ</button>
+      <button onclick="append('Math.sqrt(')">√</button>
+
+     <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button onclick="append('-')">−</button>
+      <button onclick="append('Math.sin(')">sin</button>
+      <button onclick="append('Math.cos(')">cos</button>
+
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button onclick="append('+')">+</button>
+      <button onclick="append('Math.tan(')">tan</button>
+      <button onclick="append('Math.log10(')">log</button>
+
+      <button onclick="append('0')">0</button>
+      <button onclick="append('.')">.</button>
+      <button class="equals" onclick="calculate()">=</button>
+      <button onclick="append('Math.log(')">ln</button>
+      <button onclick="append('(')">(</button>
+      <button onclick="append(')')">)</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+
+    function append(value) {
+      if (display.innerText === "0" || display.innerText === "Error") {
+        display.innerText = value;
+      } else {
+        display.innerText += value;
+      }
+    }
+
+    function clearDisplay() {
+      display.innerText = "0";
+    }
+
+    function delChar() {
+      display.innerText = display.innerText.slice(0, -1) || "0";
+    }
+
+    function calculate() {
+      try {
+        let result = eval(display.innerText);
+        display.innerText = result;
+      } catch (e) {
+        display.innerText = "Error";
+      }
+    }
+    </script>
+    </body>
+    </html>
